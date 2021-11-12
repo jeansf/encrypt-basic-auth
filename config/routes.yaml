@@ -1,0 +1,10 @@
+index:
+    path: /
+    controller: App\Controller\DefaultController::index
+
+download:
+    path: /{user}/{token}
+    controller: App\Controller\DefaultController::download
+    requirements:
+        user: '^[a-z0-9_\.@]*$'
+        token: '.*'

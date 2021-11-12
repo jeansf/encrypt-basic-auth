@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="px-4 py-5 my-5 text-center">
+        <div class="px-5">
+            {{ form(form) }}
+        </div>
+
+        {% if url %}
+            <br>
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <code class="card-text">{{ url }}</code>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
