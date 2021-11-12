@@ -61,7 +61,7 @@ class DefaultController extends AbstractController
             $urlHash = sodium_crypto_secretbox($url, $nonce, $key);
             $passwordHash = sodium_crypto_secretbox($password, $nonce, $key);
 
-            $url = $this->generateUrl('calendar', [
+            $url = $this->generateUrl('download', [
                 'user' => $user,
                 'token' => base64_encode(base64_encode($urlHash).'|'.base64_encode($passwordHash))
             ], UrlGeneratorInterface::ABSOLUTE_URL);
