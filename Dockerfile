@@ -1,5 +1,5 @@
 FROM php:7.4-apache
-LABEL maintainer="Jean Soares Fernandes <jean.fernandes@pix.com.br>"
+LABEL maintainer="Jean Soares Fernandes <3454862+jeansf@users.noreply.github.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ=America/Sao_Paulo
@@ -15,28 +15,11 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && rm -rf /var/lib/apt/lists/* /tmp/*
 
-# Install PHP "curl" extension – http://php.net/manual/en/book.curl.php
-# Install PHP "intl" extension – http://php.net/manual/en/book.intl.php
-# Install PHP "xsl" extension – http://php.net/manual/en/book.xsl.php
-# Install PHP "exif" extension – http://php.net/manual/en/book.exif.php
-# Install PHP "opcache" extension – http://php.net/manual/en/book.opcache.php
-# Install PHP "memcached" extension – http://php.net/manual/en/book.memcached.php
-# Install PHP "zip" extension
-# Install PHP "gd" extension
-# Install PHP "ldap" extension
-# Install configure PHP socket
-# Install configure PHP amqp
-# Install configure PHP json, iconv, ctype, bcmath
-# Install configure PHP mcrypt
 RUN apt-get update -y && apt-get install --no-install-recommends -y zlib1g-dev libicu-dev g++ libcurl4-openssl-dev \
-            libxslt-dev libexif-dev libmemcached-dev libwebp-dev libjpeg62-turbo-dev libpng-dev libxpm-dev \
-            libfreetype6-dev libzip-dev librabbitmq-dev libmcrypt-dev libgearman-dev libldap2-dev \
+            libxslt-dev libexif-dev libwebp-dev libjpeg62-turbo-dev libpng-dev libxpm-dev \
+            libfreetype6-dev libzip-dev \
     && docker-php-ext-configure intl \
-    && docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp --with-xpm \
-    && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
-    && docker-php-ext-install curl intl xsl exif opcache zip gd sockets json iconv ctype bcmath mcrypt ldap \
-    && pecl install memcached amqp redis gearman \
-    && docker-php-ext-enable memcached amqp redis gearman \
+    && docker-php-ext-install curl intl xsl exif opcache zip gd sockets json iconv ctype bcmath \
     && rm -rf /var/lib/apt/lists/* /tmp/*
 
 # Configure PHP
